@@ -31,11 +31,8 @@ def cast_rag_prompt(model, index, prompt):
     vector = model.encode(prompt).astype(float)
     matches = index.query(vector=list(vector),
                           top_k=50)
-    print(matches)
     ids = [int(value["id"]) for value in matches["matches"]]
-    print(ids)
     reviews = data.query("id in @ids").review.tolist()
-    print(reviews)
     reviews = [f"User_{i}: " + review for i, review in enumerate(reviews)]
     
     rag_prompt = f"""
@@ -76,10 +73,6 @@ if prompt := st.chat_input("What is up?"):
     with st.chat_message("assistant"):
         message_placeholder = st.empty()
         full_response = ""
-        for m in st.session_state.messages:
-            print("role: ", m["role"])
-            print("content: ", m["content"])
-            print("\n")
         for response in client.chat.completions.create(
             model=st.session_state["openai_model"],
             messages=[
