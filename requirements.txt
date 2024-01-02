@@ -38,7 +38,6 @@ schedule==1.2.1
 scipy==1.11.3
 seaborn==0.13.0
 selenium==4.15.2
-Send2Trash @ file:///Users/runner/miniforge3/conda-bld/send2trash_1682601407921/work
 sentence-transformers==2.2.2
 sentencepiece==0.1.99
 starlette==0.27.0
