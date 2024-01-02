@@ -18,7 +18,7 @@ def load_index():
     pinecone.init(api_key="4ab9bc56-8709-428b-b79c-97e41fd37ef4", environment='gcp-starter')
     return pinecone.Index('satisreviews')
 
-@st.cache_data
+@st.cache_resource
 def load_model():
     return SentenceTransformer('thenlper/gte-base')
 
