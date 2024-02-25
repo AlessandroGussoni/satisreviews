@@ -3,9 +3,11 @@ import streamlit as st
 from sentence_transformers import SentenceTransformer
 from sentence_transformers.util import cos_sim
 import pandas as pd
+from dotenv import load_dotenv
 
 import pinecone
 
+env = load_dotenv()
 
 @st.cache_data
 def load_data():
@@ -15,7 +17,7 @@ def load_data():
 
 @st.cache_resource
 def load_index():
-    pinecone.init(api_key="4ab9bc56-8709-428b-b79c-97e41fd37ef4", environment='gcp-starter')
+    pinecone.init(api_key=env.get("pinecone_api_key", None), environment='gcp-starter')
     return pinecone.Index('satisreviews')
 
 @st.cache_resource
@@ -49,7 +51,7 @@ def cast_rag_prompt(model, index, prompt):
 
 st.title("Chat with reviews")
 
-client = OpenAI(api_key="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")
+client = OpenAI(api_key=env.get("openai_api_key", None))
 
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-3.5-turbo"
