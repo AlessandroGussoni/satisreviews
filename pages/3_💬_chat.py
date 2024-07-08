@@ -7,7 +7,7 @@ from dotenv import load_dotenv, dotenv_values
 
 import pinecone
 
-config = dotenv_values(".env")
+env = dotenv_values(".env")
 
 @st.cache_data
 def load_data():
