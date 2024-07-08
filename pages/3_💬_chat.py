@@ -3,11 +3,11 @@ import streamlit as st
 from sentence_transformers import SentenceTransformer
 from sentence_transformers.util import cos_sim
 import pandas as pd
-from dotenv import load_dotenv
+from dotenv import load_dotenv, dotenv_values
 
 import pinecone
 
-env = load_dotenv()
+config = dotenv_values(".env")
 
 @st.cache_data
 def load_data():
